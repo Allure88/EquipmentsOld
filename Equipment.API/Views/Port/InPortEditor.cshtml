@@ -1,0 +1,98 @@
+﻿@using Equipment.Domain.Entities.Ports
+@using Equipment.Domain.Entities.Units
+@model InPort
+
+
+@{
+    ViewData["Title"] = ViewBag.CreateMode ? "Create" : "Edit";
+    Layout = "_Layout";
+}
+
+<form asp-action="@(ViewBag.CreateMode ? "CreateInPort" : "EditInPort")" method="post" asp-controller="Port">
+    <div class="form-group mb-5">
+
+        <!-- ИМЯ ДИАМЕТР ДАВЛЕНИЕ ParentId------------------------------------------------------------------------------------->
+
+        <label>Имя</label>
+        <input asp-for="Name" class="form-control" />
+        <label>Диаметр</label>
+        <input type="number" asp-for="Diametr" class="form-control" />
+        <label>Давление на выходе рабочее</label>
+        <input type="number" asp-for="PRequired" class="form-control" />
+        <input type="hidden" name="EquipmentUnitId" value="@Model.EquipmentUnitId" class="form-control" />
+
+
+
+
+        @if (!ViewBag.CreateMode)
+        {
+            <!-- INLINEUNITS--------------------------------------------------------------------------------------------------->
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="EquipmentUnit" />
+            <label class="mt-2 mb-1">Оборудование до/после порта</label>
+
+            if (Model.InlineUnits != null && Model.InlineUnits.Count > 0)
+                foreach (InlineUnit unit in Model.InlineUnits)
+                {
+                    <div class="row">
+                        <div class="col-auto border py-1" style="background-color: #EBEBEB ; min-width: 70px">@unit.Id</div>
+                        <div class="col-2 border py-1" style="background-color: #EBEBEB">@unit.Name</div>
+
+                        <!-- INLINEUNITS УДАЛИТЬ-->
+
+                        <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                            <a asp-controller="Port" asp-action="DeleteInlineUnit" class="btn btn-sm btn-outline-danger flex-fill me-1" asp-route-unitId="@unit.Id" asp-route-portId="@Model.Id">
+                                <div class="d-flex mb-1">
+                                    Удалить
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            if (ViewBag.InlineUnits != null && ViewBag.InlineUnits.Count > 0)
+            {
+                <!-- INLINEUNITS ДОБАВИТЬ-------------------------------------------------------------------------------------->
+
+                <div class="row">
+                    <div class="col-auto border py-1" style="background-color: #EBEBEB ; min-width: 70px"></div>
+                    <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                        <select id="unit_selected" class="form-select form-select-lg mb-3">
+                            @foreach (EquipmentUnit unit in ViewBag.InlineUnits)
+                            {
+                                <option value="@unit.Id">@unit.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                        <a id="add_equipment" asp-controller="Unit" asp-action="Index" class="btn btn-sm btn-outline-success flex-fill me-1" onclick="AddEquipmentToUnit(@Model.Id)">
+                            <div class="d-flex mb-1">
+                                Добавить в список
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        }
+
+
+
+        <!-- Подтверждение---------------------------------------------------------------------------------------------------->
+
+    </div>
+    <div class="text-center">
+        <button class="btn btn-outline-success" type="submit">Сохранить</button>
+        <a href="@ViewBag.ReturnURL" class="btn btn-outline-secondary">Отмена</a>
+    </div>
+</form>
+
+<script>
+    function AddEquipmentToUnit(port_id) {
+        var e = document.getElementById("unit_selected");
+        var unit_id = e.value;
+        //var text = e.options[e.selectedIndex].text;
+        var elem = document.getElementById('add_equipment');
+        elem.href = elem.href + `Port/AddInlineUnit/?unit_id=${unit_id}&port_id=${port_id}`;
+    }
+</script>

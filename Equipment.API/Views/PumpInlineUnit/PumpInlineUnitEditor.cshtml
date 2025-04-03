@@ -1,0 +1,56 @@
+﻿@using Equipment.Domain.Entities.Units
+@model PumpInlineUnitEntity
+
+
+@{
+    ViewData["Title"] = ViewBag.CreateMode ? "Create" : "Edit";
+    Layout = "_Layout";
+}
+
+
+<form asp-action="@(ViewBag.CreateMode ? "Create" : "Edit")" method="post" asp-controller="InlineUnit">
+    <div class="form-group mb-5">
+        <label asp-for="Name">Имя</label>
+        <input asp-for="Name" class="form-control" />
+        <label>Компания</label>
+        <select asp-for="Company.Id" asp-items="@ViewBag.Companies" class="form-select form-select-lg mb-3">
+        </select>
+    </div>
+
+    <!-- INTPUTS -->
+    <label>Входы</label>
+    <div class="row">
+        <div class="col-auto border py-1" style="background-color: #EBEBEB; min-width: 70px"></div>
+        <input type="hidden" asp-for="@Model.PumpPorts[0].Id" value="@Model.PumpPorts[0].Id" />
+        <input type="hidden" asp-for="@Model.PumpPorts[0].PortNumber" value="@Model.PumpPorts[0].PortNumber" />
+        <input type="hidden" asp-for="@Model.PumpPorts[0].PumpUnitId" value="@Model.PumpPorts[0].PumpUnitId" />
+        <input type="text" asp-for="@Model.PumpPorts[0].Name" class="col-2 border py-1" style="background-color: #EBEBEB" />
+        <input type="number" asp-for="@Model.PumpPorts[0].Diametr" class="col-2 border py-1" style="background-color: #EBEBEB" />
+        <div class="col-2 border py-1" style="background-color: #EBEBEB"></div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB"></div>
+    </div>
+
+    <!-- OUTPUTS -->
+    <label>Выходы</label>
+    <div class="row">
+        <div class="col-auto border py-1" style="background-color: #EBEBEB; min-width: 70px"></div>
+        <input type="hidden" asp-for="@Model.PumpPorts[Model.PumpPorts.Count-1].PumpUnitId" value="@Model.PumpPorts[Model.PumpPorts.Count-1].PumpUnitId" />
+        <input type="hidden" asp-for="@Model.PumpPorts[Model.PumpPorts.Count-1].Id" value="@Model.PumpPorts[Model.PumpPorts.Count-1].Id" />
+        <input type="hidden" asp-for="@Model.PumpPorts[Model.PumpPorts.Count-1].PortNumber" value="@Model.PumpPorts[Model.PumpPorts.Count-1].PortNumber" />
+        <input type="text" asp-for="@Model.PumpPorts[Model.PumpPorts.Count-1].Name" class="col-2 border py-1" style="background-color: #EBEBEB" />
+        <input type="number" asp-for="@Model.PumpPorts[Model.PumpPorts.Count-1].Diametr" class="col-2 border py-1" style="background-color: #EBEBEB" />
+        <div class="col-2 border py-1" style="background-color: #EBEBEB"></div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB"></div>
+    </div>
+
+
+
+    <div class="text-center my-2">
+        <button class="btn btn-outline-success" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+    </div>
+
+</form>
+
+
+<script src="~/unitRedactor.js"></script>

@@ -1,0 +1,3 @@
+ dotnet ef --startup-project Equipment.API.csproj --project ../Equipment.Persistence/Equipment.Persistence.csproj migrations add Init
+
+dotnet ef --startup-project Equipment.API.csproj --project ../Equipment.Persistence/Equipment.Persistence.csproj database update  

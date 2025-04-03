@@ -1,0 +1,105 @@
+﻿@using Equipment.Domain.Entities.Units
+@model EquipmentUnit
+
+
+@{
+    ViewData["Title"] = ViewBag.CreateMode ? "Create" : "Edit";
+    Layout = "_Layout";
+}
+
+
+<form asp-action="@(ViewBag.CreateMode ? "Create" : "Edit")" method="post" asp-controller="Unit">
+    <div class="form-group mb-5">
+        <label asp-for="Name">Имя</label>
+        <input asp-for="Name" class="form-control" />
+        <label>Компания</label>
+        <select asp-for="Company.Id" asp-items="@ViewBag.Companies" class="form-select form-select-lg mb-3">
+        </select>
+    </div>
+
+    <!-- INTPUTS -->
+    @if (Model.InPorts.Count > 0)
+    {
+        <label>Входы</label>
+    }
+    <div id="in_ports">
+        @foreach (var port in Model.InPorts)
+        {
+            <div class="row">
+                <div class="col-auto border py-1" style="background-color: #EBEBEB ; min-width: 70px"></div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">@port.Name</div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">@port.Diametr мм</div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                    <div class="d-flex mb-1">
+                        <a asp-controller="Port" asp-action="Edit" class="btn btn-sm btn-outline-warning flex-fill me-1" asp-route-id="@port.Id">Редактировать</a>
+                    </div>
+                </div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                    <form a asp-controller="Port" asp-action="Delete" method="post">
+                        <div class="d-flex mb-1">
+                            <input type="hidden" name="id" value="@port.Id" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger flex-fill me-1">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!--Пока unit не сохранен, порт не к чему цеплять-->
+    @if (!ViewBag.CreateMode)
+    {
+        <!-- Ссылка на Id родителя, к которому порт цепляется-->
+        <a asp-controller="Port" asp-action="Create" class="btn btn btn-outline-success my-2" asp-route-unitId="@Model.Id" asp-route-portType="input">Добавить вход</a>
+    }
+
+
+    <!-- OUTPUTS -->
+    @if (Model.InPorts.Count > 0)
+    {
+        <div>
+
+        <label>Выходы</label>
+        </div>
+    }
+    <div id="in_ports">
+        @foreach (var port in Model.OutPorts)
+        {
+            <div class="row">
+                <div class="col-auto border py-1" style="background-color: #EBEBEB ; min-width: 70px"></div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">@port.Name</div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">@port.Diametr мм</div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                    <div class="d-flex mb-1">
+                        <a asp-controller="Port" asp-action="Edit" class="btn btn-sm btn-outline-warning flex-fill me-1" asp-route-id="@port.Id">Редактировать</a>
+                    </div>
+                </div>
+                <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                    <form a asp-controller="Port" asp-action="Delete" method="post">
+                        <div class="d-flex mb-1">
+                            <input type="hidden" name="id" value="@port.Id" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger flex-fill me-1">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!--Пока unit не сохранен, порт не к чему цеплять-->
+    @if (!ViewBag.CreateMode)
+    {
+        <!-- Ссылка на Id родителя, к которому порт цепляется-->
+        <a asp-controller="Port" asp-action="Create" class="btn btn btn-outline-success my-2" asp-route-unitId="@Model.Id" asp-route-portType="output">Добавить выход</a>
+    }
+
+
+    <div class="text-center">
+        <button class="btn btn-outline-success" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+    </div>
+
+</form>
+
+
+<script src="~/unitRedactor.js"></script>

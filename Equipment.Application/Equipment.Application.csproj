@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="UseCases_CQRS\**" />
+    <EmbeddedResource Remove="UseCases_CQRS\**" />
+    <None Remove="UseCases_CQRS\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\Persistence\IAttachedRepository.cs" />
+    <Compile Remove="Contracts\Persistence\ICommonInlinePortRepository.cs" />
+    <Compile Remove="Contracts\Persistence\IDistributionRepository.cs" />
+    <Compile Remove="Contracts\Persistence\IFilterPortRepository.cs" />
+    <Compile Remove="Contracts\Persistence\IPumpInlinePortRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="UseCases_CQRS\Common\Commands\Company\PostAddCompany.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Company\PostDeleteCompany.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Component\PostAddComponent.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Component\PostDeleteComponent.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Diametr\PostAddDiametr.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Diametr\PostDeleteDiametr.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\EquipmentType\PostAddEquipmentType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\EquipmentType\PostDeleteEquipmentType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Material\PostAddMaterial.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\Material\PostDeleteMaterial.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\PipeType\PostAddPipeType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\PipeType\PostDeletePipeType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\StageType\PostAddStageType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Commands\StageType\PostDeleteStageType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Company\GetCompany.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Company\GetCompanyBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Component\GetComponent.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Component\GetComponentBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Diametr\GetDiametr.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Diametr\GetDiametrBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\EquipmentType\GetEquipmentType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\EquipmentType\GetEquipmentTypeBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Material\GetMaterial.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\Material\GetMaterialBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\PipeType\GetPipyType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\PipeType\GetPipyTypeBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\StageType\GetStageType.cs" />
+    <Compile Include="UseCases_CQRS\Common\Queries\StageType\GetStageTypeBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\ExternalProgramm\Commands\PostDeleteExternalProgrammCommand.cs" />
+    <Compile Include="UseCases_CQRS\ExternalProgramm\Commands\PostAddExternalProgrammCommand.cs" />
+    <Compile Include="UseCases_CQRS\ExternalProgramm\Queries\GetExternalProgramm.cs" />
+    <Compile Include="UseCases_CQRS\ExternalProgramm\Queries\GetExternalProgrammList.cs" />
+    <Compile Include="UseCases_CQRS\Filters\Commands\PostAddSanUnitBodyCommand.cs" />
+    <Compile Include="UseCases_CQRS\Filters\Commands\PostDeleteSanUnitBodyCommand.cs" />
+    <Compile Include="UseCases_CQRS\Filters\Queries\GetFilterBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\Filters\Queries\GetFilterBody.cs" />
+    <Compile Include="UseCases_CQRS\InlineUnit\Commands\PostInlineUnitCommand.cs" />
+    <Compile Include="UseCases_CQRS\InlineUnit\Commands\PostInlineUnitResponce.cs" />
+    <Compile Include="UseCases_CQRS\InlineUnit\Commands\PostInlineUnitResponceHandler.cs" />
+    <Compile Include="UseCases_CQRS\InlineUnit\Queries\GetPumpInlineUnitList.cs" />
+    <Compile Include="UseCases_CQRS\InlineUnit\Queries\GetPumpInlineUnit.cs" />
+    <Compile Include="UseCases_CQRS\SpecialFilter\Commands\PostAddSpecialFilterBodyCommand.cs" />
+    <Compile Include="UseCases_CQRS\SpecialFilter\Commands\PostDeleteSpecialFilterBodyCommand.cs" />
+    <Compile Include="UseCases_CQRS\SpecialFilter\Queries\GetSpecialFilterBodiesList.cs" />
+    <Compile Include="UseCases_CQRS\SpecialFilter\Queries\GetSpecialFilterBody.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Equipment.Domain\Equipment.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="5.1.0" />
+  </ItemGroup>
+
+</Project>

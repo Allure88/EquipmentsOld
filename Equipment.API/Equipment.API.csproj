@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>66ba8cb5-c659-43b9-8c49-bc0935f38f96</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="Equipment.Persistence\**" />
+    <Compile Remove="Views\Company\**" />
+    <Compile Remove="Views\PumpInlineUnit\**" />
+    <Compile Remove="Views\Port\**" />
+    <Compile Remove="Views\Shared\**" />
+    <Compile Remove="Views\Unit\**" />
+    <Content Remove="bin\**" />
+    <Content Remove="Equipment.Persistence\**" />
+    <Content Remove="Views\Company\**" />
+    <Content Remove="Views\PumpInlineUnit\**" />
+    <Content Remove="Views\Port\**" />
+    <Content Remove="Views\Shared\**" />
+    <Content Remove="Views\Unit\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Equipment.Persistence\**" />
+    <EmbeddedResource Remove="Views\Company\**" />
+    <EmbeddedResource Remove="Views\PumpInlineUnit\**" />
+    <EmbeddedResource Remove="Views\Port\**" />
+    <EmbeddedResource Remove="Views\Shared\**" />
+    <EmbeddedResource Remove="Views\Unit\**" />
+    <None Remove="bin\**" />
+    <None Remove="Equipment.Persistence\**" />
+    <None Remove="Views\Company\**" />
+    <None Remove="Views\PumpInlineUnit\**" />
+    <None Remove="Views\Port\**" />
+    <None Remove="Views\Shared\**" />
+    <None Remove="Views\Unit\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\PortController.cs" />
+    <Compile Remove="Controllers\UnitController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="5.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Equipment.Persistence\Equipment.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Company\CompanyEditor.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\PumpInlineUnit\Index.cshtml" />
+    <Content Include="Views\PumpInlineUnit\PumpInlineUnitEditor.cshtml" />
+  </ItemGroup>
+
+</Project>

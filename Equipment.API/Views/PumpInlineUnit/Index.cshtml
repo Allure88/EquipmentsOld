@@ -1,0 +1,35 @@
+﻿@using Equipment.Domain.Entities.Units
+@model List<PumpInlineUnitEntity>
+
+@{
+    ViewData["Title"] = "Оборудование";
+    Layout = "_Layout";
+}
+<p class="h5" style="margin-bottom:20px">Оборудование, устанавливаемое на трубу</p>
+
+
+@foreach (var unit in Model)
+{
+    <div class="row">
+        <div class="col-auto border py-1" style="background-color: #EBEBEB; min-width: 70px">@unit.Id</div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB">@unit.Name</div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB">@unit.Company.Name</div>
+        <div class="col-1 border py-1" style="background-color: #EBEBEB">Dвх. @unit.PumpPorts[0].Diametr мм</div>
+        <div class="col-1 border py-1" style="background-color: #EBEBEB">Dвых. @unit.PumpPorts[unit.PumpPorts.Count - 1].Diametr мм</div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB">
+            <div class="d-flex mb-1">
+                <a asp-action="Edit" class="btn btn-sm btn-outline-warning flex-fill me-1" asp-route-id="@unit.Id">Редактировать</a>
+            </div>
+        </div>
+        <div class="col-2 border py-1" style="background-color: #EBEBEB">
+            <form asp-action="Delete" method="post">
+                <div class="d-flex mb-1">
+                    <input type="hidden" name="id" value="@unit.Id" />
+                    <button type="submit" class="btn btn-sm btn-outline-danger flex-fill me-1">Удалить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+}
+<a asp-controller="InlineUnit" asp-action="Create" class="btn btn btn-outline-success my-2">Создать новое оборудование</a>

@@ -1,0 +1,33 @@
+﻿@model List<CompanyEntity>
+
+@{
+    ViewData["Title"] = "Компании";
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+    <p class="h5" style="margin-bottom:20px">Компании</p>
+
+    @foreach (var company in Model)
+    {
+        <div class="row">
+            <div class="col-1 border py-1" style="background-color: #EBEBEB">@company.Id</div>
+            <div class="col-4 border py-1" style="background-color: #EBEBEB">@company.Name</div>
+            <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                <div class="d-flex mb-1">
+                    <a asp-action="Edit" class="btn btn-sm btn-outline-warning flex-fill me-1" asp-route-id="@company.Id">Редактировать</a>
+                </div>
+            </div>
+            <div class="col-2 border py-1" style="background-color: #EBEBEB">
+                <form asp-action="Delete" method="post">
+                    <div class="d-flex mb-1">
+                        <input type="hidden" name="id" value="@company.Id" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger flex-fill me-1">Удалить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+<a asp-controller="Company" asp-action="Create" class="btn btn btn-outline-success my-2">Создать новую компанию</a>
